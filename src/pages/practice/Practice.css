@@ -1,0 +1,13 @@
+.flashcard--list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 24px;
+  padding: 24px;
+}
+
+.flashcard {
+  border: 1px solid black;
+  text-align: center;
+  padding: 8px;
+  border-radius: 16px;
+}
