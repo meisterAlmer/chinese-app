@@ -23,7 +23,7 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink exact to="/lessons" activeClassName="active">
+            <NavLink to="/lessons" activeClassName="active">
               Lessons
             </NavLink>
           </li>

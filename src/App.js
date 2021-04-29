@@ -1,8 +1,8 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/header/Header';
-// import Sidebar from './components/Sidebar';
+// import Sidebar from './components/sidebar/Sidebar';
 import Home from './pages/home/Home';
 import AboutMe from './pages/aboutMe/AboutMe';
 import Lessons from './pages/lessons/Lessons';
@@ -28,11 +28,11 @@ function App() {
             <Route path="/aboutme">
               <AboutMe />
             </Route>
-            <Route path="/lessons">
+            <Route exact path="/lessons">
               <Lessons />
             </Route>
 
-            <Route exact path="/lesson/:lesson">
+            <Route exact path="/lessons/lesson/:lesson">
               <Lesson />
             </Route>
 

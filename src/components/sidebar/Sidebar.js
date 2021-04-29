@@ -1,28 +1,33 @@
-// import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Sidebar.css';
 
-function Sidebar({ lessons, setPage, setLessonNr }) {
-  const handleClick = function (lesson) {
-    setLessonNr(lesson);
-    setPage('lesson');
-  };
+function Sidebar({ active }) {
+  const [lessons, setLessons] = useState([1, 2, 3]);
 
   return (
-    <aside>
+    <aside className="sidebar">
       <ul>
         <ul>
           <li>
-            <p
-              onClick={() => {
-                setPage('overview');
-              }}
+            <Link
+              to={`/lessons/`}
+              className={active === 'overview' ? 'sidebar--active' : ''}
             >
               Overview
-            </p>
+            </Link>
           </li>
           {lessons.map(lesson => {
             return (
               <li key={lesson}>
-                <p onClick={() => handleClick([lesson])}>Lesson {lesson}</p>
+                <Link
+                  to={`/lessons/lesson/${lesson}`}
+                  className={
+                    active === `lesson${lesson}` ? 'sidebar--active' : ''
+                  }
+                >
+                  Lesson {lesson}
+                </Link>
               </li>
             );
           })}

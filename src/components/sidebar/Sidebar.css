@@ -1,0 +1,7 @@
+.sidebar {
+  border-right: 1px solid silver;
+}
+
+.sidebar--active {
+  color: red;
+}

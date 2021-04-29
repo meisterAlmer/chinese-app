@@ -3,17 +3,12 @@
   display: grid;
   grid-template-rows: 45px 1fr;
   grid-template-columns: 1fr;
-  /* grid-template-columns: 200px 1fr; */
 }
 
 header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
   /* stretch from first grid line to last grid line */
   grid-column: 1/-1;
-}
-
-aside {
-  background-color: #213e48;
 }
 
 main {
