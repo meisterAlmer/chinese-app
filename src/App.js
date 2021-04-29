@@ -6,7 +6,9 @@ import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import AboutMe from './pages/aboutMe/AboutMe';
 import Lessons from './pages/lessons/Lessons';
+import Lesson from './pages/lessons/Lesson';
 import Practice from './pages/practice/Practice';
+import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
 // import { LoginContext } from '../../context/LoginContext';
 
@@ -29,8 +31,16 @@ function App() {
             <Route path="/lessons">
               <Lessons />
             </Route>
+
+            <Route exact path="/lesson/:lesson">
+              <Lesson />
+            </Route>
+
             <Route path="/practice">
               <Practice />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
             <Route path="/login">
               <Login />

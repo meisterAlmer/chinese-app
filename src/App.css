@@ -15,3 +15,7 @@ header {
 aside {
   background-color: #213e48;
 }
+
+main {
+  padding: 0;
+}

@@ -1,6 +1,8 @@
 // import './App.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { LoginContext } from '../../context/LoginContext';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 // firebase config
 import app from '../../modules/firebase';
@@ -8,7 +10,9 @@ import app from '../../modules/firebase';
 // const db = app.firestore();
 
 function Login() {
-  const { userLogout, appUser, userChecked } = useContext(LoginContext);
+  const { appUser, userChecked } = useContext(LoginContext);
+
+  const history = useHistory();
 
   // register user
   const userRegister = async event => {
@@ -36,6 +40,13 @@ function Login() {
     }
   };
 
+  // Redirect if  logged in
+  useEffect(() => {
+    if (appUser && userChecked) {
+      history.push('/profile');
+    }
+  }, [appUser]);
+
   return (
     <section>
       <h1>Login</h1>
@@ -46,12 +57,6 @@ function Login() {
         commodo consequat.
       </p>
       {!userChecked && <p>Loading...</p>}
-      {appUser && userChecked && (
-        <>
-          <p>Hello {appUser.email}</p>
-          <button onClick={userLogout}>Logout</button>
-        </>
-      )}
 
       {!appUser && userChecked && (
         <>

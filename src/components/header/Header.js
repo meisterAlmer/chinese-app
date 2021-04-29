@@ -32,6 +32,13 @@ function Header() {
               Practice
             </NavLink>
           </li>
+          {appUser && (
+            <li>
+              <NavLink exact to="/profile" activeClassName="active">
+                Profile
+              </NavLink>
+            </li>
+          )}
           {!appUser && (
             <li>
               <NavLink exact to="/login" activeClassName="active">

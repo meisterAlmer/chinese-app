@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Link, useHistory } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContext';
 import './Practice.css';
 
@@ -22,7 +22,7 @@ function Practice() {
     if (!appUser && userChecked) {
       history.push('/');
     }
-  }, [appUser]);
+  }, [appUser, userChecked]);
 
   // Get all data
   useEffect(() => {
@@ -56,6 +56,7 @@ function Practice() {
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
+      {!isLoaded && <p>Loading...</p>}
       <div className="flashcard--list">
         {isLoaded &&
           userChecked &&
