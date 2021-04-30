@@ -6,7 +6,7 @@ import Header from './components/header/Header';
 import Home from './pages/home/Home';
 import AboutMe from './pages/aboutMe/AboutMe';
 import Lessons from './pages/lessons/Lessons';
-import Lesson from './pages/lessons/Lesson';
+import Lesson from './pages/lesson/Lesson';
 import Practice from './pages/practice/Practice';
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';

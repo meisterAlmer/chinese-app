@@ -39,7 +39,7 @@ function Lesson() {
           {page === 'Conversation' && <Conversation />}
           {page === 'New Words' && <NewWords />}
           {page === 'Flash Cards' && <FlashCards lesson={lesson} />}
-          {page === 'Quiz' && <Quiz />}
+          {page === 'Quiz' && <Quiz lesson={lesson} />}
         </section>
       </article>
     </section>
