@@ -1,14 +1,9 @@
 import { useEffect, useState } from 'react';
 import QuizCard from '../quizCard/QuizCard';
 
-// firebase config
-import app from '../../modules/firebase';
-const db = app.firestore();
-
-function Quiz({ lesson }) {
-  // const [lesson, setLesson] = useState(1);
+function Quiz({ lesson, data }) {
   const [isLoaded, toggleIsLoaded] = useState(false);
-  const [appData, setAppData] = useState([]);
+  const [appData] = useState(data);
   const [quizData, setQuizData] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
   const [score, setScore] = useState(0);
@@ -41,20 +36,20 @@ function Quiz({ lesson }) {
     setCurrentCard(currentCard + 1);
   };
 
-  // Generate random number within range
-  const generateRandomNumber = (min, max, exclude) => {
-    let ranNum = Math.floor(Math.random() * (max - min)) + min;
-    // Check for double answers
-    for (let i = 0; i < exclude.length; i++) {
-      if (ranNum === exclude[i]) {
-        ranNum = generateRandomNumber(min, max, exclude);
-      }
-    }
-    return ranNum;
-  };
-
   // Generate random answers for new card
   useEffect(() => {
+    // Generate random number within range
+    const generateRandomNumber = (min, max, exclude) => {
+      let ranNum = Math.floor(Math.random() * (max - min)) + min;
+      // Check for double answers
+      for (let i = 0; i < exclude.length; i++) {
+        if (ranNum === exclude[i]) {
+          ranNum = generateRandomNumber(min, max, exclude);
+        }
+      }
+      return ranNum;
+    };
+
     const answerArr = [];
     if (quizData.length > 0) {
       answerArr.push(currentCard);
@@ -63,39 +58,11 @@ function Quiz({ lesson }) {
       }
       setAnswers(shuffledArr(answerArr));
     }
-  }, [currentCard]);
-
-  // Get all data from database
-  useEffect(() => {
-    console.log('Getting quiz data');
-
-    const data = [];
-    const quizNumber = Number(lesson);
-
-    db.collection('words')
-      .where('lesson', '==', quizNumber)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          data.push({
-            hanzi: doc.data().hanzi,
-            pinyin: doc.data().pinyin,
-            translation: doc.data().translation,
-            lesson: doc.data().lesson,
-          });
-        });
-      })
-      .then(() => {
-        setAppData(data);
-      })
-      .catch(error => {
-        console.log('Error getting documents: ', error);
-      });
-  }, []);
+  }, [currentCard, quizData.length]);
 
   return (
     <div>
-      {<h1>Lesson {lesson} Quiz</h1>}
+      {<h1>Quiz</h1>}
       {isLoaded && answers.length > 0 && !complete && (
         <>
           <h2>Score: {score}</h2>

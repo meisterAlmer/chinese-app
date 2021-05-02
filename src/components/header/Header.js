@@ -46,6 +46,7 @@ function Header() {
               </NavLink>
             </li>
           )}
+
           {appUser && (
             <li>
               <button onClick={userLogout}>Logout</button>

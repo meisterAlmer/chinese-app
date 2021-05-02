@@ -1,18 +1,20 @@
 // import './App.css';
-import { useContext, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { LoginContext } from '../../context/LoginContext';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 
 // firebase config
 import app from '../../modules/firebase';
 
-// const db = app.firestore();
-
 function Login() {
-  const { appUser, userChecked } = useContext(LoginContext);
+  const [loginDisplay, setLoginDisplay] = useState('login');
+  const [error, setError] = useState();
 
-  const history = useHistory();
+  const toggleLogin = function (type) {
+    setLoginDisplay(type);
+    setError('');
+  };
+
+  const { appUser, userChecked } = useContext(LoginContext);
 
   // register user
   const userRegister = async event => {
@@ -25,6 +27,7 @@ function Login() {
         .createUserWithEmailAndPassword(email.value, password.value);
     } catch (e) {
       console.error(e);
+      setError(e);
     }
   };
 
@@ -37,15 +40,9 @@ function Login() {
       await app.auth().signInWithEmailAndPassword(email.value, password.value);
     } catch (e) {
       console.error(e);
+      setError(e);
     }
   };
-
-  // Redirect if  logged in
-  useEffect(() => {
-    if (appUser && userChecked) {
-      history.push('/profile');
-    }
-  }, [appUser]);
 
   return (
     <section>
@@ -58,7 +55,26 @@ function Login() {
       </p>
       {!userChecked && <p>Loading...</p>}
 
-      {!appUser && userChecked && (
+      {!appUser && userChecked && loginDisplay === 'login' && (
+        <>
+          <form onSubmit={userLogin} id="loginform">
+            <h1>Login</h1>
+            <input type="email" placeholder="email" />
+            <input type="password" placeholder="password" />
+            <input type="submit" value="Login" />
+          </form>
+          <button
+            type="button"
+            onClick={() => {
+              toggleLogin('register');
+            }}
+          >
+            Register
+          </button>
+        </>
+      )}
+
+      {!appUser && userChecked && loginDisplay === 'register' && (
         <>
           <form onSubmit={userRegister} id="registerform">
             <h1>Register</h1>
@@ -66,15 +82,18 @@ function Login() {
             <input type="password" placeholder="password" />
             <input type="submit" value="Register" />
           </form>
-
-          <form onSubmit={userLogin} id="loginform">
-            <h1>Login</h1>
-            <input type="email" placeholder="email" />
-            <input type="password" placeholder="password" />
-            <input type="submit" value="Login" />
-          </form>
+          <button
+            type="button"
+            onClick={() => {
+              toggleLogin('login');
+            }}
+          >
+            Login
+          </button>
         </>
       )}
+
+      {error && <p>{error.message}</p>}
     </section>
   );
 }

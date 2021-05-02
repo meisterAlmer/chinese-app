@@ -1,5 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import NewWords from '../../components/newWords/NewWords';
+import FlashCards from '../../components/flashCards/FlashCards';
+import Quiz from '../../components/quiz/Quiz';
 import { LoginContext } from '../../context/LoginContext';
 import './Practice.css';
 
@@ -8,25 +11,42 @@ import app from '../../modules/firebase';
 const db = app.firestore();
 
 function Practice() {
+  const { appUser, userChecked, totalLessons } = useContext(LoginContext);
+
   const [appData, setAppData] = useState([]);
   const [isLoaded, toggleIsLoaded] = useState(false);
-  const [lessons, setLessons] = useState([1, 2, 3]);
+  const [lessons, setLessons] = useState(totalLessons);
+  const [page, setPage] = useState('New Words');
 
-  const { appUser, userChecked } = useContext(LoginContext);
+  const data = ['New Words', 'Flash Cards', 'Quiz'];
 
   const history = useHistory();
 
-  // Redirect if not logged in
+  // login user
+  const filterWords = function (event) {
+    event.preventDefault();
+    const selected = [];
+
+    for (let i = 0; i < event.target.length; i++) {
+      if (event.target[i].checked) {
+        selected.push(Number(event.target[i].value));
+      }
+    }
+    setLessons([...selected]);
+    console.log(lessons);
+  };
+
+  // // Redirect if  logged in
   useEffect(() => {
     if (!appUser && userChecked) {
-      history.push('/');
+      history.push('/profile');
     }
-  }, [appUser, userChecked]);
+  }, [appUser, userChecked, history]);
 
   // Get all data
   useEffect(() => {
     if (!appUser) return;
-
+    toggleIsLoaded(false);
     const data = [];
 
     db.collection('words')
@@ -46,58 +66,66 @@ function Practice() {
       });
   }, [lessons, appUser]);
 
+  // const checkboxHandler = function (item) {
+  //   return true;
+  // };
+
   return (
     <section>
       <h1>Practice</h1>
+      <h2>Complete overview of words</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
-      {!isLoaded && <p>Loading...</p>}
-      <div className="flashcard--list">
+      <form onSubmit={filterWords} id="filter">
+        <h1>Filter</h1>
         {isLoaded &&
-          userChecked &&
-          appData &&
-          appUser &&
-          appData.map(word => {
+          totalLessons &&
+          totalLessons.map(item => {
             return (
-              <div key={word.pinyin} className="flashcard">
-                <h1>{word.hanzi}</h1>
-                <p>{word.pinyin}</p>
-                <p>{word.translation}</p>
-                <p>{word.lesson}</p>
+              <div key={item}>
+                <label>
+                  <input
+                    type="checkbox"
+                    id={item}
+                    name={`lesson${item}`}
+                    value={item}
+                    // onChange={() => item === 2}
+                    // onChange={checkboxHandler}
+                    // checked={checkboxHandler}
+                    // defaultChecked
+                  ></input>
+                  Lesson {item}
+                </label>
               </div>
             );
           })}
-      </div>
+        <input type="submit" value="Apply Filter" />
+      </form>
+
+      {!isLoaded && <p>Loading...</p>}
       {isLoaded && userChecked && appData && appUser && (
         <div>
-          <button
-            type="button"
-            onClick={() => {
-              setLessons([1]);
-            }}
-          >
-            lesson 1
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setLessons([2]);
-            }}
-          >
-            lesson 2
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setLessons([1, 2]);
-            }}
-          >
-            All lessons
-          </button>
+          <ul className="pills">
+            {data.map(item => {
+              return (
+                <li key={item}>
+                  <button type="button" onClick={() => setPage(item)}>
+                    {item}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {page === 'New Words' && <NewWords data={appData} />}
+          {page === 'Flash Cards' && (
+            <FlashCards lesson={lessons} data={appData} />
+          )}
+          {page === 'Quiz' && <Quiz lesson={lessons} data={appData} />}
         </div>
       )}
     </section>

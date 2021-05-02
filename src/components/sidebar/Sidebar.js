@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
 function Sidebar({ active }) {
-  const [lessons, setLessons] = useState([1, 2, 3]);
+  const [lessons] = useState([1, 2, 3]);
 
   return (
     <aside className="sidebar">

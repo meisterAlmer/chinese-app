@@ -1,8 +1,12 @@
 import './App.css';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Header from './components/header/Header';
-// import Sidebar from './components/sidebar/Sidebar';
 import Home from './pages/home/Home';
 import AboutMe from './pages/aboutMe/AboutMe';
 import Lessons from './pages/lessons/Lessons';
@@ -10,16 +14,26 @@ import Lesson from './pages/lesson/Lesson';
 import Practice from './pages/practice/Practice';
 import Profile from './pages/profile/Profile';
 import Login from './pages/login/Login';
-// import { LoginContext } from '../../context/LoginContext';
+import { LoginContext } from './context/LoginContext';
 
 function App() {
-  // const { activeLogin } = useContext(LoginContext); <-- Data from context file
+  const { appUser } = useContext(LoginContext);
+  function PrivateRoute({ children, isAuth, ...rest }) {
+    return (
+      <Route {...rest}>{isAuth ? children : <Redirect to="/login" />}</Route>
+    );
+  }
+
+  function LoginRoute({ children, isAuth, ...rest }) {
+    return (
+      <Route {...rest}>{!isAuth ? children : <Redirect to="/profile" />}</Route>
+    );
+  }
 
   return (
     <Router>
       <div className="app">
         <Header />
-        {/* <Sidebar /> */}
         <main>
           <Switch>
             <Route exact path="/">
@@ -36,15 +50,17 @@ function App() {
               <Lesson />
             </Route>
 
-            <Route path="/practice">
+            <Route exact path="/practice">
               <Practice />
             </Route>
-            <Route path="/profile">
+
+            <PrivateRoute exact path="/profile" isAuth={appUser}>
               <Profile />
-            </Route>
-            <Route path="/login">
+            </PrivateRoute>
+
+            <LoginRoute exact path="/login" isAuth={appUser}>
               <Login />
-            </Route>
+            </LoginRoute>
           </Switch>
         </main>
       </div>

@@ -1,10 +1,17 @@
+import { useState } from 'react';
+
 function Flashcard({ data, currentCard }) {
+  const [flipCard, toggleFlipCard] = useState(false);
+
   return (
-    <div className="flashcard">
-      <h1>{data[[currentCard]].hanzi}</h1>
-      <p>{data[[currentCard]].pinyin}</p>
-      <p>{data[[currentCard]].translation}</p>
-      <p>data: {data[[currentCard]].lesson}</p>
+    <div className="flashcard" onClick={() => toggleFlipCard(!flipCard)}>
+      {!flipCard && <h1>{data[[currentCard]].hanzi}</h1>}
+      {flipCard && (
+        <>
+          <p>{data[[currentCard]].pinyin}</p>
+          <p>{data[[currentCard]].translation}</p>
+        </>
+      )}
     </div>
   );
 }

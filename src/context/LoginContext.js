@@ -40,6 +40,7 @@ function LoginContextProvider({ children }) {
     appUser: appUser,
     setAppUser: setAppUser,
     userChecked: userChecked,
+    totalLessons: [1, 2, 3],
   };
 
   return <LoginContext.Provider value={data}>{children}</LoginContext.Provider>;

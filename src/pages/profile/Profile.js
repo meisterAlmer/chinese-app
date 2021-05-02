@@ -1,21 +1,21 @@
 // import './App.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 // const db = app.firestore();
 
 function Profile() {
   const { userLogout, appUser, userChecked } = useContext(LoginContext);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   // Redirect if not logged in
-  useEffect(() => {
-    if (!appUser && userChecked) {
-      history.push('/login');
-    }
-  }, [appUser, userChecked]);
+  // useEffect(() => {
+  //   if (!appUser && userChecked) {
+  //     history.push('/login');
+  //   }
+  // }, [appUser, userChecked]);
 
   return (
     <section>
