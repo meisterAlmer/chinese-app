@@ -6,3 +6,9 @@
 .word > * {
   flex: 1;
 }
+
+.pills {
+  display: flex;
+  list-style: none;
+  margin: 32px 0;
+}

@@ -22,19 +22,26 @@ function Practice() {
 
   const history = useHistory();
 
-  // login user
-  const filterWords = function (event) {
-    event.preventDefault();
-    const selected = [];
+  // // Reset selected lessons if empty
+  // useEffect(() => {
+  //   if (!lessons) {
+  //     setLessons(totalLessons);
+  //   }
+  // }, [lessons, totalLessons]);
 
-    for (let i = 0; i < event.target.length; i++) {
-      if (event.target[i].checked) {
-        selected.push(Number(event.target[i].value));
-      }
-    }
-    setLessons([...selected]);
-    console.log(lessons);
-  };
+  // // login user
+  // const filterWords = function (event) {
+  //   event.preventDefault();
+  //   const selected = [];
+
+  //   for (let i = 0; i < event.target.length; i++) {
+  //     if (event.target[i].checked) {
+  //       selected.push(Number(event.target[i].value));
+  //     }
+  //   }
+  //   setLessons([...selected]);
+  //   // console.log(lessons);
+  // };
 
   // // Redirect if  logged in
   useEffect(() => {
@@ -66,24 +73,36 @@ function Practice() {
       });
   }, [lessons, appUser]);
 
-  // const checkboxHandler = function (item) {
-  //   return true;
-  // };
+  const checkboxHandler = function (value) {
+    let arr = lessons;
+    if (arr.includes(value)) {
+      arr = arr.filter(item => item !== value);
+    } else {
+      arr = [...arr, value];
+      // arr = arr.push(value);
+    }
+    if (!arr.length) arr = totalLessons;
+    setLessons(arr);
+  };
+
+  const isChecked = function (item) {
+    if (lessons.includes(item)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <section>
       <h1>Practice</h1>
       <h2>Complete overview of words</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      <form onSubmit={filterWords} id="filter">
+      <p>Selected lesson: {lessons}</p>
+      <form id="filter">
         <h1>Filter</h1>
         {isLoaded &&
           totalLessons &&
+          lessons &&
           totalLessons.map(item => {
             return (
               <div key={item}>
@@ -93,9 +112,9 @@ function Practice() {
                     id={item}
                     name={`lesson${item}`}
                     value={item}
-                    // onChange={() => item === 2}
+                    onChange={() => checkboxHandler(item)}
                     // onChange={checkboxHandler}
-                    // checked={checkboxHandler}
+                    checked={isChecked(item)}
                     // defaultChecked
                   ></input>
                   Lesson {item}
@@ -103,11 +122,11 @@ function Practice() {
               </div>
             );
           })}
-        <input type="submit" value="Apply Filter" />
+        {/* <input type="submit" value="Apply Filter" /> */}
       </form>
 
       {!isLoaded && <p>Loading...</p>}
-      {isLoaded && userChecked && appData && appUser && (
+      {isLoaded && userChecked && appData && appUser && lessons && (
         <div>
           <ul className="pills">
             {data.map(item => {
