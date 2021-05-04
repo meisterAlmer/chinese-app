@@ -3,16 +3,24 @@ import QuizCard from '../quizCard/QuizCard';
 
 function Quiz({ lesson, data }) {
   const [isLoaded, toggleIsLoaded] = useState(false);
-  const [appData] = useState(data);
+  // const [appData, setAppData] = useState(data);
   const [quizData, setQuizData] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
   const [score, setScore] = useState(0);
   const [complete, toggleComplete] = useState(false);
   const [answers, setAnswers] = useState([]);
 
+  useEffect(() => {
+    toggleIsLoaded(false);
+    setQuizData(shuffledArr(data));
+    toggleComplete(false);
+    setCurrentCard(0);
+    setScore(0);
+  }, [data]);
+
   // Start quiz
   const startQuiz = () => {
-    setQuizData(shuffledArr(appData));
+    setQuizData(shuffledArr(data));
     toggleIsLoaded(true);
     toggleComplete(false);
     setCurrentCard(0);
@@ -85,7 +93,7 @@ function Quiz({ lesson, data }) {
           </p>
         </>
       )}
-      {quizData.length === 0 && (
+      {!isLoaded && (
         <button type="button" onClick={startQuiz}>
           Start Quiz!
         </button>
