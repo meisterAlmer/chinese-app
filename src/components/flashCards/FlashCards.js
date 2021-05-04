@@ -1,21 +1,15 @@
 import { useEffect, useState } from 'react';
 import Flashcard from '../flashCard/FlashCard';
 
-// firebase config
-// import app from '../../modules/firebase';
-// const db = app.firestore();
-
 function FlashCards({ lesson, data }) {
   const [appData, setAppData] = useState(data);
-  const [isLoaded, toggleIsLoaded] = useState(false);
   const [cardNumber, setCardNumber] = useState(0);
-  const [cardTotal] = useState(data.length);
-  // const [currentLesson] = useState(lesson);
+  const [cardTotal, setCardTotal] = useState(appData.length);
+  const [newRender, toggleNewRender] = useState(false);
 
-  // // Shuffle data
+  // set state to re-render shuffled cards
   const shuffleCards = () => {
-    setAppData(shuffledArr(appData));
-    setCardNumber(0);
+    toggleNewRender(true);
   };
 
   const shuffledArr = array =>
@@ -36,23 +30,24 @@ function FlashCards({ lesson, data }) {
     } else setCardNumber(0);
   }
 
-  // Get lesson data
+  // Shuffle data and render
   useEffect(() => {
-    if (appData) {
-      toggleIsLoaded(true);
-    }
-  }, [appData]);
+    setCardTotal(data.length);
+    setAppData(shuffledArr(data));
+    setCardNumber(0);
+    toggleNewRender(false);
+  }, [data, newRender]);
 
   return (
     <section>
       <h1>Flash Cards</h1>
-      {!isLoaded && <p>Loading...</p>}
-      {isLoaded && appData && (
+
+      {cardTotal && (
         <>
           <Flashcard data={appData} currentCard={cardNumber} />
 
           <p>
-            Card {cardNumber + 1} out of {appData.length}
+            Card {cardNumber + 1} out of {cardTotal}
           </p>
           <button type="button" onClick={prevCard}>
             Previous

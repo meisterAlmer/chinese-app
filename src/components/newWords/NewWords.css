@@ -6,3 +6,7 @@
 .word > * {
   flex: 1;
 }
+
+.word-header p {
+  font-weight: 900;
+}

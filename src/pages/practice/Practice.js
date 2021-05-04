@@ -78,7 +78,7 @@ function Practice() {
 
   // When lessons change filter data
   useEffect(() => {
-    console.log('FILTER CHANGED!');
+    // console.log('FILTER CHANGED!');
     const myData = appData;
     let arr = [];
     lessons.forEach(function (entry) {
@@ -90,7 +90,7 @@ function Practice() {
   }, [lessons, appData]);
 
   const checkboxHandler = function (value) {
-    console.log('HANDLED IT');
+    // console.log('HANDLED IT');
     let lessonArr = lessons;
     if (lessonArr.includes(value)) {
       lessonArr = lessonArr.filter(item => item !== value);
@@ -126,7 +126,6 @@ function Practice() {
     <section>
       <h1>Practice</h1>
       <h2>Complete overview of words</h2>
-      <p>Selected lesson: {lessons}</p>
       <form id="filter">
         <h1>Filter</h1>
         {isLoaded &&
@@ -142,9 +141,7 @@ function Practice() {
                     name={`lesson${item}`}
                     value={item}
                     onChange={() => checkboxHandler(item)}
-                    // onChange={checkboxHandler}
                     checked={isChecked(item)}
-                    // defaultChecked
                   ></input>
                   Lesson {item}
                 </label>
@@ -174,7 +171,7 @@ function Practice() {
           {page === 'Flash Cards' && (
             <FlashCards lesson={lessons} data={filterData} />
           )}
-          {page === 'Quiz' && <Quiz lesson={lessons} data={filterData} />}
+          {page === 'Quiz' && <Quiz data={filterData} />}
         </div>
       )}
     </section>
