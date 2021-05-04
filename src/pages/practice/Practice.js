@@ -14,6 +14,7 @@ function Practice() {
   const { appUser, userChecked, totalLessons } = useContext(LoginContext);
 
   const [appData, setAppData] = useState([]);
+  const [filterData, setFilterData] = useState(appData);
   const [isLoaded, toggleIsLoaded] = useState(false);
   const [lessons, setLessons] = useState(totalLessons);
   const [page, setPage] = useState('New Words');
@@ -57,7 +58,7 @@ function Practice() {
     const data = [];
 
     db.collection('words')
-      .where('lesson', 'in', lessons)
+      // .where('lesson', 'in', lessons)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -66,23 +67,51 @@ function Practice() {
       })
       .then(() => {
         setAppData(data);
+        // setFilterData(data);
         toggleIsLoaded(true);
       })
       .catch(error => {
         console.log('Error getting documents: ', error);
       });
-  }, [lessons, appUser]);
+    console.log('DB Data loaded');
+  }, [appUser]);
+
+  // When lessons change filter data
+  useEffect(() => {
+    console.log('FILTER CHANGED!');
+    const myData = appData;
+    let arr = [];
+    lessons.forEach(function (entry) {
+      const entryData = myData.filter(item => item.lesson === entry);
+      arr.push(...entryData);
+    });
+
+    setFilterData(arr);
+  }, [lessons, appData]);
 
   const checkboxHandler = function (value) {
-    let arr = lessons;
-    if (arr.includes(value)) {
-      arr = arr.filter(item => item !== value);
+    console.log('HANDLED IT');
+    let lessonArr = lessons;
+    if (lessonArr.includes(value)) {
+      lessonArr = lessonArr.filter(item => item !== value);
     } else {
-      arr = [...arr, value];
-      // arr = arr.push(value);
+      lessonArr = [...lessonArr, value];
     }
-    if (!arr.length) arr = totalLessons;
-    setLessons(arr);
+    if (!lessonArr.length) lessonArr = totalLessons;
+    lessonArr.sort(function (a, b) {
+      return a - b;
+    });
+    setLessons(lessonArr);
+    // console.log(lessonArr);
+
+    // let arr = [];
+    // lessonArr.forEach(function (entry) {
+    //   const entryData = appData.filter(item => item.lesson === entry);
+    //   arr.push(...entryData);
+    // });
+
+    // setFilterData(arr);
+    // console.log(arr);
   };
 
   const isChecked = function (item) {
@@ -126,7 +155,8 @@ function Practice() {
       </form>
 
       {!isLoaded && <p>Loading...</p>}
-      {isLoaded && userChecked && appData && appUser && lessons && (
+
+      {isLoaded && filterData && (
         <div>
           <ul className="pills">
             {data.map(item => {
@@ -140,11 +170,11 @@ function Practice() {
             })}
           </ul>
 
-          {page === 'New Words' && <NewWords data={appData} />}
+          {page === 'New Words' && <NewWords data={filterData} />}
           {page === 'Flash Cards' && (
-            <FlashCards lesson={lessons} data={appData} />
+            <FlashCards lesson={lessons} data={filterData} />
           )}
-          {page === 'Quiz' && <Quiz lesson={lessons} data={appData} />}
+          {page === 'Quiz' && <Quiz lesson={lessons} data={filterData} />}
         </div>
       )}
     </section>
