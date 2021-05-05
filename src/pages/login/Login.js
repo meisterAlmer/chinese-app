@@ -26,7 +26,7 @@ function Login() {
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
       setError(e);
     }
   };
@@ -39,7 +39,7 @@ function Login() {
     try {
       await app.auth().signInWithEmailAndPassword(email.value, password.value);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
       setError(e);
     }
   };

@@ -1,8 +1,9 @@
 import './NewWords.css';
 import { useState, useEffect } from 'react';
+import WordList from '../wordList/WordList';
 
 function NewWords({ data }) {
-  const [sortData, setSortData] = useState(data);
+  const [sortData, setSortData] = useState();
   const [filterType, toggleFilterType] = useState('type-ab');
 
   const sortType = function (sort) {
@@ -66,17 +67,7 @@ function NewWords({ data }) {
         </p>
       </div>
       <div className="word--list">
-        {sortData &&
-          sortData.map(word => {
-            return (
-              <div key={word.pinyin} className="word">
-                <p>{word.hanzi}</p>
-                <p>{word.pinyin}</p>
-                <p>{word.translation}</p>
-                <p>{word.type}</p>
-              </div>
-            );
-          })}
+        {sortData && <WordList data={sortData} />}
       </div>
     </section>
   );

@@ -3,13 +3,12 @@
 function Home() {
   return (
     <section>
-      <h1>Let’s learn Mandarin Chinese!</h1>
+      <h1>Learn Mandarin online with a private tutor on Skype or Zoom.</h1>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+        Get your own personal online Chinese tutor. Great for individuals,
+        businesses, and children.
       </p>
+      <button>CTA</button>
     </section>
   );
 }
