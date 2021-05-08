@@ -7,6 +7,8 @@ import NewWords from '../../components/newWords/NewWords';
 import FlashCards from '../../components/flashCards/FlashCards';
 import Quiz from '../../components/quiz/Quiz';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Pills from '../../components/pills/Pills';
+import Loading from '../../components/loading/Loading';
 
 // firebase config
 import app from '../../modules/firebase';
@@ -58,35 +60,26 @@ function Lesson() {
   }, [lesson]);
 
   return (
-    <section className="lessons--main">
-      <Sidebar className="lessons--nav" active={`lesson${lesson}`} />
-      {!isLoaded && <article>Loading...</article>}
+    <section className="lessons__main">
+      {!isLoaded && <Loading />}
       {isLoaded && appData && (
-        <article className="lessons--content">
-          <h3>Lesson {lesson}</h3>
-          <h1>Lesson title</h1>
-          <section>
-            <ul className="pills">
-              {data.map(item => {
-                return (
-                  <li key={item}>
-                    <button type="button" onClick={() => setPage(item)}>
-                      {item}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-          <section>
-            {page === 'Conversation' && <Conversation lesson={lesson} />}
-            {page === 'New Words' && <NewWords data={appData} />}
-            {page === 'Flash Cards' && (
-              <FlashCards lesson={lesson} data={appData} />
-            )}
-            {page === 'Quiz' && <Quiz lesson={lesson} data={appData} />}
-          </section>
-        </article>
+        <>
+          <Sidebar className="lessons__nav" active={`lesson${lesson}`} />
+          <article className="lessons__content">
+            <h1>Lesson {lesson}</h1>
+            <section>
+              <Pills data={data} page={page} setPage={setPage} />
+            </section>
+            <section>
+              {page === 'Conversation' && <Conversation lesson={lesson} />}
+              {page === 'New Words' && <NewWords data={appData} />}
+              {page === 'Flash Cards' && (
+                <FlashCards lesson={lesson} data={appData} />
+              )}
+              {page === 'Quiz' && <Quiz lesson={lesson} data={appData} />}
+            </section>
+          </article>
+        </>
       )}
     </section>
   );

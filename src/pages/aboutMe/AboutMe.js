@@ -1,15 +1,21 @@
-// import './App.css';
+import about from '../../assets/about.svg';
+import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <section>
-      <h1>About Me</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+    <section className="about">
+      <div className="about__image">
+        <img src={about} alt={about} />
+      </div>
+      <div className="about__content">
+        <h1>About Me</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan
+          hendrerit dapibus. Ut condimentum fringilla turpis pretium porttitor.
+          Donec est felis, dignissim quis sodales sed, aliquet ac massa. Nulla
+          facilisi. Aenean quis elementum neque.
+        </p>
+      </div>
     </section>
   );
 }

@@ -1,0 +1,21 @@
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 80px 40px 40px 40px;
+  max-width: 1280px;
+}
+
+.about__content {
+  flex: 4;
+  padding-left: 40px;
+}
+
+.about__image {
+  flex: 3;
+}
+
+.about__image img {
+  width: 100%;
+}

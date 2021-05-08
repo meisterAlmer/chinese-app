@@ -1,0 +1,25 @@
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 80px 40px 40px 40px;
+  max-width: 1280px;
+}
+
+.home__highlight {
+  color: var(--color-main);
+}
+
+.home__content {
+  flex: 4;
+  padding-right: 40px;
+}
+
+.home__image {
+  flex: 3;
+}
+
+.home__image img {
+  width: 100%;
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import Loading from '../../components/loading/Loading';
 
-// import './NewWords.css';
+import './Conversation.css';
 
 // firebase config
 import app from '../../modules/firebase';
@@ -37,28 +38,32 @@ function Conversation({ lesson }) {
   }, [lesson]);
 
   return (
-    <section>
-      <h1>Conversation lesson {lesson}</h1>
-      <button
-        type="button"
-        onClick={() => {
-          showText === 'hanzi' ? setShowText('pinyin') : setShowText('hanzi');
-        }}
-      >
-        {showText === 'hanzi' ? 'pinyin' : 'hanzi'}
-      </button>
-      {isLoaded &&
-        showText === 'hanzi' &&
-        textHanzi.map(text => {
-          return <p key={text}>{text}</p>;
-        })}
+    <>
+      {!isLoaded && <Loading />}
 
-      {isLoaded &&
-        showText === 'pinyin' &&
-        textPinyin.map(text => {
-          return <p key={text}>{text}</p>;
-        })}
-    </section>
+      <section className="conversation__text">
+        <h2>Conversation</h2>
+        <p
+          onClick={() => {
+            showText === 'hanzi' ? setShowText('pinyin') : setShowText('hanzi');
+          }}
+          className="switch"
+        >
+          {showText === 'hanzi' ? 'Show Pinyin' : 'Show Hanzi'}
+        </p>
+        {isLoaded &&
+          showText === 'hanzi' &&
+          textHanzi.map(text => {
+            return <p key={text}>{text}</p>;
+          })}
+
+        {isLoaded &&
+          showText === 'pinyin' &&
+          textPinyin.map(text => {
+            return <p key={text}>{text}</p>;
+          })}
+      </section>
+    </>
   );
 }
 

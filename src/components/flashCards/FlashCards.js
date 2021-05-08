@@ -1,5 +1,7 @@
+import './FlashCards.css';
 import { useEffect, useState } from 'react';
 import Flashcard from '../flashCard/FlashCard';
+import Button from '../../components/button/Button';
 
 function FlashCards({ lesson, data }) {
   const [appData, setAppData] = useState(data);
@@ -40,25 +42,31 @@ function FlashCards({ lesson, data }) {
 
   return (
     <section>
-      <h1>Flash Cards</h1>
-
       {cardTotal && (
-        <>
-          <Flashcard data={appData} currentCard={cardNumber} />
+        <div class="cards-container">
+          <h2>Flash Cards</h2>
+          <div className="cards-container__holder">
+            <div className="cards-container__browser">
+              <p onClick={prevCard}>Previous</p>
+            </div>
+            <Flashcard data={appData} currentCard={cardNumber} />
+            <div className="cards-container__browser">
+              <p onClick={nextCard} className="cards-container__browser">
+                Next
+              </p>
+            </div>
+          </div>
+          <Button
+            label={'Shuffle'}
+            clickEvent={shuffleCards}
+            disabled={false}
+            small={false}
+          />
 
           <p>
             Card {cardNumber + 1} out of {cardTotal}
           </p>
-          <button type="button" onClick={prevCard}>
-            Previous
-          </button>
-          <button type="button" onClick={nextCard}>
-            Next
-          </button>
-          <button type="button" onClick={shuffleCards}>
-            Shuffle
-          </button>
-        </>
+        </div>
       )}
     </section>
   );

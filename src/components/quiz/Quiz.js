@@ -1,5 +1,8 @@
+import './Quiz.css';
 import { useEffect, useState } from 'react';
 import QuizCard from '../quizCard/QuizCard';
+import QuizAnswers from '../quizAnswers/QuizAnswers';
+import Button from '../../components/button/Button';
 
 function Quiz({ lesson, data }) {
   const [isLoaded, toggleIsLoaded] = useState(false);
@@ -69,44 +72,42 @@ function Quiz({ lesson, data }) {
   }, [currentCard, quizData.length]);
 
   return (
-    <div>
-      {<h1>Quiz</h1>}
+    <div className="quiz">
+      {<h2>Quiz</h2>}
       {isLoaded && answers.length > 0 && !complete && (
         <>
-          <h2>Score: {score}</h2>
+          <h2 className="quiz__score">Score: {score}</h2>
           <QuizCard data={quizData} currentCard={currentCard} />
-
-          {answers.map(answer => {
-            return (
-              <button
-                type="button"
-                onClick={() => nextCard(answer)}
-                key={answer}
-              >
-                {quizData[answer].translation}
-              </button>
-            );
-          })}
-
+          <QuizAnswers
+            answers={answers}
+            quizData={quizData}
+            nextCard={nextCard}
+          />
           <p>
-            Card {currentCard + 1} out of {quizData.length}
+            Question {currentCard + 1} out of {quizData.length}
           </p>
         </>
       )}
       {!isLoaded && (
-        <button type="button" onClick={startQuiz}>
-          Start Quiz!
-        </button>
+        <Button
+          label={'Start Quiz!'}
+          clickEvent={startQuiz}
+          disabled={false}
+          small={false}
+        />
       )}
       {complete && (
-        <div>
+        <div className="quiz__complete">
           <h1>Quiz Completed!</h1>
           <h2>
             Your final score is: {score} out of {quizData.length}
           </h2>
-          <button type="button" onClick={startQuiz}>
-            Try Again!
-          </button>
+          <Button
+            label={'Try Again!'}
+            clickEvent={startQuiz}
+            disabled={false}
+            small={false}
+          />
         </div>
       )}
     </div>

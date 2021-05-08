@@ -1,6 +1,7 @@
-// import './App.css';
+import './Login.css';
 import { useContext, useState } from 'react';
 import { LoginContext } from '../../context/LoginContext';
+import Loading from '../../components/loading/Loading';
 
 // firebase config
 import app from '../../modules/firebase';
@@ -45,56 +46,76 @@ function Login() {
   };
 
   return (
-    <section>
-      <h1>Login</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-      {!userChecked && <p>Loading...</p>}
+    <>
+      {!userChecked && <Loading />}
+      <section className="login">
+        <div className="login__box">
+          {!appUser && userChecked && loginDisplay === 'login' && (
+            <>
+              <form onSubmit={userLogin} id="loginform">
+                <h1>Login</h1>
+                <input
+                  type="email"
+                  className="login__input"
+                  placeholder="email"
+                />
+                <input
+                  type="password"
+                  className="login__input"
+                  placeholder="password"
+                />
+                <input type="submit" value="Login" className="login__submit" />
+              </form>
+              {error && loginDisplay === 'login' && (
+                <p className="login__error">{error.message}</p>
+              )}
+              <p
+                className="login__link"
+                onClick={() => {
+                  toggleLogin('register');
+                }}
+              >
+                No account? Click here to register
+              </p>
+            </>
+          )}
 
-      {!appUser && userChecked && loginDisplay === 'login' && (
-        <>
-          <form onSubmit={userLogin} id="loginform">
-            <h1>Login</h1>
-            <input type="email" placeholder="email" />
-            <input type="password" placeholder="password" />
-            <input type="submit" value="Login" />
-          </form>
-          <button
-            type="button"
-            onClick={() => {
-              toggleLogin('register');
-            }}
-          >
-            Register
-          </button>
-        </>
-      )}
-
-      {!appUser && userChecked && loginDisplay === 'register' && (
-        <>
-          <form onSubmit={userRegister} id="registerform">
-            <h1>Register</h1>
-            <input type="email" placeholder="email" />
-            <input type="password" placeholder="password" />
-            <input type="submit" value="Register" />
-          </form>
-          <button
-            type="button"
-            onClick={() => {
-              toggleLogin('login');
-            }}
-          >
-            Login
-          </button>
-        </>
-      )}
-
-      {error && <p>{error.message}</p>}
-    </section>
+          {!appUser && userChecked && loginDisplay === 'register' && (
+            <>
+              <form onSubmit={userRegister} id="registerform">
+                <h1>Register</h1>
+                <input
+                  type="email"
+                  className="login__input"
+                  placeholder="email"
+                />
+                <input
+                  type="password"
+                  className="login__input"
+                  placeholder="password"
+                />
+                <input
+                  type="submit"
+                  value="Register"
+                  className="login__submit"
+                />
+              </form>
+              {error && loginDisplay === 'register' && (
+                <p className="login__error">{error.message}</p>
+              )}
+              <p
+                className="login__link"
+                onClick={() => {
+                  toggleLogin('login');
+                }}
+              >
+                Already have an account? Log in here
+              </p>
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 

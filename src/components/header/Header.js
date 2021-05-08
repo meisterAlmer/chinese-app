@@ -2,6 +2,7 @@ import './Header.css';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { LoginContext } from '../../context/LoginContext';
+import Button from '../../components/button/Button';
 
 function Header() {
   const { appUser, userLogout } = useContext(LoginContext);
@@ -49,7 +50,12 @@ function Header() {
 
           {appUser && (
             <li>
-              <button onClick={userLogout}>Logout</button>
+              <Button
+                label={'Logout'}
+                clickEvent={userLogout}
+                disabled={false}
+                small={true}
+              />
             </li>
           )}
         </ul>

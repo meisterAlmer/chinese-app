@@ -1,0 +1,7 @@
+#filter {
+  display: flex;
+}
+
+#filter div {
+  margin-right: 12px;
+}

@@ -41,33 +41,35 @@ function NewWords({ data }) {
   }, [filterType, data]);
 
   return (
-    <section>
-      <h1>New Words ({filterType})</h1>
+    <section className="words">
+      <h2>New Words ({filterType})</h2>
 
-      <div className="word word-header">
-        <p>Hanzi</p>
-        <p
-          onClick={() => {
-            sortType('pinyin');
-          }}
-        >
-          Pinyin
-          {filterType === 'pinyin-ab' && <span>⬇️</span>}
-          {filterType === 'pinyin-ba' && <span>⬆️</span>}
-        </p>
-        <p>Translation</p>
-        <p
-          onClick={() => {
-            sortType('type');
-          }}
-        >
-          Type
-          {filterType === 'type-ab' && <span>⬇️</span>}
-          {filterType === 'type-ba' && <span>⬆️</span>}
-        </p>
-      </div>
-      <div className="word--list">
-        {sortData && <WordList data={sortData} />}
+      <div className="words-content">
+        <div className="word word-header">
+          <p>Hanzi</p>
+          <p
+            onClick={() => {
+              sortType('pinyin');
+            }}
+          >
+            Pinyin
+            {filterType === 'pinyin-ab' && <span>⬇️</span>}
+            {filterType === 'pinyin-ba' && <span>⬆️</span>}
+          </p>
+          <p>Translation</p>
+          <p
+            onClick={() => {
+              sortType('type');
+            }}
+          >
+            Type
+            {filterType === 'type-ab' && <span>⬇️</span>}
+            {filterType === 'type-ba' && <span>⬆️</span>}
+          </p>
+        </div>
+        <div className="word--list">
+          {sortData && <WordList data={sortData} />}
+        </div>
       </div>
     </section>
   );

@@ -1,3 +1,7 @@
+.practice {
+  padding: 40px;
+}
+
 .word {
   display: flex;
   justify-content: space-between;

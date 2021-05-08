@@ -1,0 +1,29 @@
+.pills {
+  padding: 0;
+  list-style-type: none;
+}
+
+.pills__pill {
+  border: none;
+  background: none;
+  font-size: 16px;
+  background: var(--color-inactive);
+  color: var(--color-text);
+  padding: 10px 16px;
+  border-radius: 18px;
+  text-transform: uppercase;
+  margin-right: 12px;
+}
+
+.pills__pill:hover {
+  cursor: pointer;
+}
+
+.pills__pill:focus {
+  outline: none;
+}
+
+.pills__pill--active {
+  background: var(--color-main);
+  color: #ffffff;
+}

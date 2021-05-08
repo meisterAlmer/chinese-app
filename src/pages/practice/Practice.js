@@ -4,6 +4,9 @@ import NewWords from '../../components/newWords/NewWords';
 import FlashCards from '../../components/flashCards/FlashCards';
 import Quiz from '../../components/quiz/Quiz';
 import { LoginContext } from '../../context/LoginContext';
+import Loading from '../../components/loading/Loading';
+import Pills from '../../components/pills/Pills';
+import Filters from '../../components/filters/Filters';
 import './Practice.css';
 
 // firebase config
@@ -22,27 +25,6 @@ function Practice() {
   const data = ['New Words', 'Flash Cards', 'Quiz'];
 
   const history = useHistory();
-
-  // // Reset selected lessons if empty
-  // useEffect(() => {
-  //   if (!lessons) {
-  //     setLessons(totalLessons);
-  //   }
-  // }, [lessons, totalLessons]);
-
-  // // login user
-  // const filterWords = function (event) {
-  //   event.preventDefault();
-  //   const selected = [];
-
-  //   for (let i = 0; i < event.target.length; i++) {
-  //     if (event.target[i].checked) {
-  //       selected.push(Number(event.target[i].value));
-  //     }
-  //   }
-  //   setLessons([...selected]);
-  //   // console.log(lessons);
-  // };
 
   // // Redirect if  logged in
   useEffect(() => {
@@ -102,16 +84,6 @@ function Practice() {
       return a - b;
     });
     setLessons(lessonArr);
-    // console.log(lessonArr);
-
-    // let arr = [];
-    // lessonArr.forEach(function (entry) {
-    //   const entryData = appData.filter(item => item.lesson === entry);
-    //   arr.push(...entryData);
-    // });
-
-    // setFilterData(arr);
-    // console.log(arr);
   };
 
   const isChecked = function (item) {
@@ -123,49 +95,20 @@ function Practice() {
   };
 
   return (
-    <section>
+    <section className="practice">
       <h1>Practice</h1>
-      <h2>Complete overview of words</h2>
-      <form id="filter">
-        <h1>Filter</h1>
-        {isLoaded &&
-          totalLessons &&
-          lessons &&
-          totalLessons.map(item => {
-            return (
-              <div key={item}>
-                <label>
-                  <input
-                    type="checkbox"
-                    id={item}
-                    name={`lesson${item}`}
-                    value={item}
-                    onChange={() => checkboxHandler(item)}
-                    checked={isChecked(item)}
-                  ></input>
-                  Lesson {item}
-                </label>
-              </div>
-            );
-          })}
-        {/* <input type="submit" value="Apply Filter" /> */}
-      </form>
+      <h2>Practice all the words</h2>
+      <Filters
+        totalLessons={totalLessons}
+        isChecked={isChecked}
+        checkboxHandler={checkboxHandler}
+      />
 
-      {!isLoaded && <p>Loading...</p>}
+      {!isLoaded && <Loading />}
 
       {isLoaded && filterData && (
         <div>
-          <ul className="pills">
-            {data.map(item => {
-              return (
-                <li key={item}>
-                  <button type="button" onClick={() => setPage(item)}>
-                    {item}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <Pills data={data} page={page} setPage={setPage} />
 
           {page === 'New Words' && <NewWords data={filterData} />}
           {page === 'Flash Cards' && (

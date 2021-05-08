@@ -1,0 +1,16 @@
+.answer {
+  border: none;
+  background: var(--color-main);
+  color: #ffffff;
+  padding: 12px 22px;
+  font-size: 22px;
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+}
+
+.answer:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

@@ -1,4 +1,4 @@
-.lessons--main {
+.lessons__main {
   display: grid;
   grid-template-columns: 300px 1fr;
   grid-gap: 0;
@@ -7,6 +7,26 @@
   padding: 0;
 }
 
-.lessons--content {
+.lessons__content {
   padding: 44px;
 }
+
+.lessons__flex {
+  display: flex;
+   align-items: center;
+  justify-content: center;
+}
+
+.lessons__text {
+  flex: 4;
+  padding-right: 40px;
+}
+
+.lessons__image {
+  flex: 3;
+}
+
+.lessons__image img {
+  width: 100%;
+}
+

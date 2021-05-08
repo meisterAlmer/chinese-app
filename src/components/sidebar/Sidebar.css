@@ -1,7 +1,19 @@
 .sidebar {
-  border-right: 1px solid silver;
+  border-right: 1px solid #dddddd;
+  padding: 40px;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar__list li {
+  margin-bottom: 12px;
 }
 
 .sidebar--active {
-  color: red;
+  color: var(--color-main);
+  font-weight: 900;
 }
