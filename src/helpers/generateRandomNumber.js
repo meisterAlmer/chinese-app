@@ -1,7 +1,5 @@
-// Generate random number within range
 function generateRandomNumber(min, max, exclude) {
   let ranNum = Math.floor(Math.random() * (max - min)) + min;
-
   // Check for double answers
   for (let i = 0; i < exclude.length; i++) {
     if (ranNum === exclude[i]) {
