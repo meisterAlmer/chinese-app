@@ -3,8 +3,6 @@ import React, { createContext, useState, useEffect } from 'react';
 // firebase config
 import app from '../modules/firebase';
 
-// const db = app.firestore();
-
 export const LoginContext = createContext({});
 
 function LoginContextProvider({ children }) {

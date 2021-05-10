@@ -40,7 +40,6 @@ function Practice() {
     const data = [];
 
     db.collection('words')
-      // .where('lesson', 'in', lessons)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -49,18 +48,15 @@ function Practice() {
       })
       .then(() => {
         setAppData(data);
-        // setFilterData(data);
         toggleIsLoaded(true);
       })
       .catch(error => {
         console.log('Error getting documents: ', error);
       });
-    console.log('DB Data loaded');
   }, [appUser]);
 
   // When lessons change filter data
   useEffect(() => {
-    // console.log('FILTER CHANGED!');
     const myData = appData;
     let arr = [];
     lessons.forEach(function (entry) {
@@ -72,7 +68,6 @@ function Practice() {
   }, [lessons, appData]);
 
   const checkboxHandler = function (value) {
-    // console.log('HANDLED IT');
     let lessonArr = lessons;
     if (lessonArr.includes(value)) {
       lessonArr = lessonArr.filter(item => item !== value);

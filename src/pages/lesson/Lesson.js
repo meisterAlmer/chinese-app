@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { LoginContext } from '../../context/LoginContext';
-import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Conversation from '../../components/conversation/Conversation';
 import NewWords from '../../components/newWords/NewWords';
 import FlashCards from '../../components/flashCards/FlashCards';

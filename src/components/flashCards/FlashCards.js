@@ -2,8 +2,9 @@ import './FlashCards.css';
 import { useEffect, useState } from 'react';
 import Flashcard from '../flashCard/FlashCard';
 import Button from '../../components/button/Button';
+import shuffledArr from '../../helpers/shuffledArr';
 
-function FlashCards({ lesson, data }) {
+function FlashCards({ data }) {
   const [appData, setAppData] = useState(data);
   const [cardNumber, setCardNumber] = useState(0);
   const [cardTotal, setCardTotal] = useState(appData.length);
@@ -13,12 +14,6 @@ function FlashCards({ lesson, data }) {
   const shuffleCards = () => {
     toggleNewRender(true);
   };
-
-  const shuffledArr = array =>
-    array
-      .map(a => ({ sort: Math.random(), value: a }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(a => a.value);
 
   function prevCard() {
     if (cardNumber > 0) {
@@ -43,7 +38,7 @@ function FlashCards({ lesson, data }) {
   return (
     <section>
       {cardTotal && (
-        <div class="cards-container">
+        <div className="cards-container">
           <h2>Flash Cards</h2>
           <div className="cards-container__holder">
             <div className="cards-container__browser">

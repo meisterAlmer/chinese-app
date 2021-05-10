@@ -1,9 +1,6 @@
-import { useState } from 'react';
 import './FlashCard.css';
 
 function Flashcard({ data, currentCard }) {
-  const [flipCard, toggleFlipCard] = useState(false);
-
   return (
     <div className="flashcard">
       <div className="flashcard__inner">

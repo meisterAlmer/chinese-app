@@ -26,7 +26,6 @@ function Home() {
           clickEvent={handleClick}
           disabled={false}
         />
-        {/* <button onClick={handleClick}>Start Learning!</button> */}
       </div>
       <div className="home__image">
         <img src={home} alt={home} />

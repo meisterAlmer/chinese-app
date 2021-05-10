@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import QuizCard from '../quizCard/QuizCard';
 import QuizAnswers from '../quizAnswers/QuizAnswers';
 import Button from '../../components/button/Button';
+import generateRandomNumber from '../../helpers/generateRandomNumber';
+import shuffledArr from '../../helpers/shuffledArr';
 
 function Quiz({ lesson, data }) {
   const [isLoaded, toggleIsLoaded] = useState(false);
-  // const [appData, setAppData] = useState(data);
   const [quizData, setQuizData] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
   const [score, setScore] = useState(0);
@@ -30,13 +31,6 @@ function Quiz({ lesson, data }) {
     setScore(0);
   };
 
-  // Shuffle array
-  const shuffledArr = array =>
-    array
-      .map(a => ({ sort: Math.random(), value: a }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(a => a.value);
-
   // Answer clicked
   const nextCard = e => {
     if (e === currentCard) setScore(score + 1);
@@ -49,22 +43,11 @@ function Quiz({ lesson, data }) {
 
   // Generate random answers for new card
   useEffect(() => {
-    // Generate random number within range
-    const generateRandomNumber = (min, max, exclude) => {
-      let ranNum = Math.floor(Math.random() * (max - min)) + min;
-      // Check for double answers
-      for (let i = 0; i < exclude.length; i++) {
-        if (ranNum === exclude[i]) {
-          ranNum = generateRandomNumber(min, max, exclude);
-        }
-      }
-      return ranNum;
-    };
-
     const answerArr = [];
     if (quizData.length > 0) {
       answerArr.push(currentCard);
       for (let i = 0; i < 2; i++) {
+        // Generate random answers for new card
         answerArr.push(generateRandomNumber(0, quizData.length, answerArr));
       }
       setAnswers(shuffledArr(answerArr));

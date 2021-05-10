@@ -27,7 +27,6 @@ function Login() {
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
     } catch (e) {
-      // console.error(e);
       setError(e);
     }
   };
