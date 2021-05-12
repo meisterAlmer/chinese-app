@@ -8,7 +8,7 @@ function shuffledArr(array) {
   if (shuffle[0] === array[0]) {
     shuffledArr(array);
   }
-  if (shuffle[0] !== array[0]) {
+  if (shuffle !== array) {
     return shuffle;
   }
 }

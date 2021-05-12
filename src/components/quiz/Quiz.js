@@ -56,7 +56,7 @@ function Quiz({ lesson, data }) {
 
   return (
     <div className="quiz">
-      {<h2>Quiz</h2>}
+      <h2>Quiz</h2>
       {isLoaded && answers.length > 0 && !complete && (
         <>
           <h2 className="quiz__score">Score: {score}</h2>
