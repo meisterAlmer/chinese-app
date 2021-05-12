@@ -15,9 +15,10 @@ const db = app.firestore();
 
 function Lesson() {
   const [appData, setAppData] = useState([]);
-  const { appUser, userChecked } = useContext(LoginContext);
   const [isLoaded, toggleIsLoaded] = useState(false);
   const [page, setPage] = useState('conversation');
+
+  const { appUser, userChecked } = useContext(LoginContext);
   const { lesson } = useParams();
 
   const history = useHistory();
@@ -71,11 +72,13 @@ function Lesson() {
             </section>
             <section>
               {page === 'Conversation' && <Conversation lesson={lesson} />}
-              {page === 'New Words' && <NewWords data={appData} />}
-              {page === 'Flash Cards' && (
+              {page === 'New Words' && appData && <NewWords data={appData} />}
+              {page === 'Flash Cards' && appData && (
                 <FlashCards lesson={lesson} data={appData} />
               )}
-              {page === 'Quiz' && <Quiz lesson={lesson} data={appData} />}
+              {page === 'Quiz' && appData && (
+                <Quiz lesson={lesson} data={appData} />
+              )}
             </section>
           </article>
         </>

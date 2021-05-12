@@ -3,68 +3,72 @@ import { useState, useEffect } from 'react';
 import WordList from '../wordList/WordList';
 
 function NewWords({ data }) {
-  const [sortData, setSortData] = useState();
-  const [filterType, toggleFilterType] = useState('type-ab');
+  const [sortData, setSortData] = useState(data);
+  const [orderPinyin, setOrderPinyin] = useState('ab');
+  const [orderType, setOrderType] = useState('ab');
 
-  const sortType = function (sort) {
-    toggleFilterType(filterType === `${sort}-ab` ? `${sort}-ba` : `${sort}-ab`);
+  const sortType = function () {
+    const myArr = data;
+    if (orderType === 'ab') {
+      myArr.sort((a, b) => a['type'].localeCompare(b['type']));
+      setOrderType('ba');
+    }
+    if (orderType === 'ba') {
+      myArr.sort((a, b) => b['type'].localeCompare(a['type']));
+      setOrderType('ab');
+    }
+    setSortData(myArr);
   };
 
-  const sortArray = function (arr, sort, order) {
-    const myArr = arr;
-    if (order === 'ab') {
-      myArr.sort((a, b) => a[sort].localeCompare(b[sort]));
+  const sortPinyin = function () {
+    const myArr = data;
+    if (orderPinyin === 'ab') {
+      myArr.sort((a, b) => a['pinyin'].localeCompare(b['pinyin']));
+      setOrderPinyin('ba');
     }
-    if (order === 'ba') {
-      myArr.sort((b, a) => a[sort].localeCompare(b[sort]));
+
+    if (orderPinyin === 'ba') {
+      myArr.sort((a, b) => b['pinyin'].localeCompare(a['pinyin']));
+      setOrderPinyin('ab');
     }
-    return myArr;
+
+    setSortData(myArr);
   };
 
-  // When lessons change filter data
+  // When new words load, order by type
   useEffect(() => {
-    let localData = data;
-
-    if (filterType === 'type-ab')
-      localData = sortArray(localData, 'type', 'ab');
-
-    if (filterType === 'type-ba')
-      localData = sortArray(localData, 'type', 'ba');
-
-    if (filterType === 'pinyin-ab')
-      localData = sortArray(localData, 'pinyin', 'ab');
-
-    if (filterType === 'pinyin-ba')
-      localData = sortArray(localData, 'pinyin', 'ba');
-    // }
-    setSortData(localData);
-  }, [filterType, data]);
+    const myArr = data;
+    myArr.sort((a, b) => a['type'].localeCompare(b['type']));
+    setOrderType('ba');
+  }, [data]);
 
   return (
     <section className="words">
-      <h2>New Words ({filterType})</h2>
+      <h2>New Words</h2>
 
       <div className="words-content">
         <div className="word word-header">
           <p>Hanzi</p>
           <p
+            className="filter"
             onClick={() => {
-              sortType('pinyin');
+              sortPinyin();
             }}
           >
             Pinyin
-            {filterType === 'pinyin-ab' && <span>⬇️</span>}
-            {filterType === 'pinyin-ba' && <span>⬆️</span>}
+            {/* {filterType === 'pinyin-ab' && <span>⬇️</span>}
+            {filterType === 'pinyin-ba' && <span>⬆️</span>} */}
           </p>
           <p>Translation</p>
           <p
+            className="filter"
             onClick={() => {
-              sortType('type');
+              sortType();
             }}
           >
             Type
-            {filterType === 'type-ab' && <span>⬇️</span>}
-            {filterType === 'type-ba' && <span>⬆️</span>}
+            {/* {filterType === 'type-ab' && <span>⬇️</span>}
+            {filterType === 'type-ba' && <span>⬆️</span>} */}
           </p>
         </div>
         <div className="word--list">

@@ -22,3 +22,11 @@
 .word-header p {
   font-weight: 900;
 }
+
+.filter {
+  text-decoration: underline;
+}
+
+.filter:hover {
+  cursor: pointer;
+}
