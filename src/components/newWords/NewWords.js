@@ -44,6 +44,11 @@ function NewWords({ data }) {
     setOrderType('ba');
   }, [data]);
 
+  // Update word list when filtered
+  useEffect(() => {
+    setSortData(data);
+  }, [data]);
+
   return (
     <section className="words">
       <h2>New Words</h2>
