@@ -2,11 +2,12 @@ import shuffledArr from './shuffledArr';
 
 test('shuffledArr() function should shuffle the array order', () => {
   // ARRANGE
-  const array = [1, 2, 3];
+  let arr1 = [1, 2, 3];
+  // let arr2 = shuffledArr(arr1);
 
   // ACT
-  const result = shuffledArr(array);
+  let arr2 = shuffledArr(arr1);
 
   // ASSERT
-  expect(result).not.toEqual(array);
+  expect(arr1[0]).not.toBe(arr2[0]);
 });

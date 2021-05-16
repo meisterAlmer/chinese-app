@@ -9,11 +9,15 @@ function AboutMe() {
       </div>
       <div className="about__content">
         <h1>About Me</h1>
+        <p>Hello everyone, I am Lei</p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan
-          hendrerit dapibus. Ut condimentum fringilla turpis pretium porttitor.
-          Donec est felis, dignissim quis sodales sed, aliquet ac massa. Nulla
-          facilisi. Aenean quis elementum neque.
+          I graduated from Beijing China and have a certification from Beijing
+          Language and Culture university as teacher, teaching Chinese as second
+          language.
+        </p>
+        <p>
+          I like reading, swimming, watch movies and visit museums. I like to
+          spending time on teaching students and chatting with them.
         </p>
       </div>
     </section>
