@@ -1,21 +1,16 @@
-// Shuffle array
 function shuffledArr(array) {
-  const orgArr = array;
+  let shuffArr = [];
 
-  const shuffArr = orgArr
-    .map(a => ({ sort: Math.random(), value: a }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(a => a.value);
-
-  // Check if shuffled well else re-shuffle
-  if (shuffArr[0] === orgArr[0]) {
-    return shuffledArr(orgArr);
+  // Shuffle array
+  for (let i in array) {
+    let randomIndex = Math.floor(Math.random() * array.length);
+    while (shuffArr.includes(array[randomIndex])) {
+      randomIndex = Math.floor(Math.random() * array.length);
+    }
+    shuffArr[i] = array[randomIndex];
   }
 
-  // If shuffled well return array
-  if (shuffArr[0] !== orgArr[0]) {
-    return shuffArr;
-  }
+  return shuffArr;
 }
 
 export default shuffledArr;
