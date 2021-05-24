@@ -1,11 +1,11 @@
-import about from '../../assets/about.svg';
-import './AboutMe.css';
+import about from "../../assets/about.svg";
+import "./AboutMe.css";
 
 function AboutMe() {
   return (
     <section className="about">
       <div className="about__image">
-        <img src={about} alt={about} />
+        <img src={about} alt="about" />
       </div>
       <div className="about__content">
         <h1>About Me</h1>

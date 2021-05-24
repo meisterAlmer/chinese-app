@@ -1,10 +1,11 @@
-import './Quiz.css';
-import { useEffect, useState } from 'react';
-import QuizCard from '../quizCard/QuizCard';
-import QuizAnswers from '../quizAnswers/QuizAnswers';
-import Button from '../../components/button/Button';
-import generateRandomNumber from '../../helpers/generateRandomNumber';
-import shuffledArr from '../../helpers/shuffledArr';
+import "./Quiz.css";
+import { useEffect, useState } from "react";
+import QuizCard from "../quizCard/QuizCard";
+import QuizAnswers from "../quizAnswers/QuizAnswers";
+import Button from "../../components/button/Button";
+import generateRandomNumber from "../../helpers/generateRandomNumber";
+import shuffledArr from "../../helpers/shuffledArr";
+import quiz from "../../assets/quiz.svg";
 
 function Quiz({ lesson, data }) {
   const [isLoaded, toggleIsLoaded] = useState(false);
@@ -32,7 +33,7 @@ function Quiz({ lesson, data }) {
   };
 
   // Answer clicked
-  const nextCard = e => {
+  const nextCard = (e) => {
     if (e === currentCard) setScore(score + 1);
     if (currentCard + 1 === quizData.length) {
       toggleComplete(true);
@@ -72,12 +73,15 @@ function Quiz({ lesson, data }) {
         </>
       )}
       {!isLoaded && (
-        <Button
-          label={'Start Quiz!'}
-          clickEvent={startQuiz}
-          disabled={false}
-          small={false}
-        />
+        <>
+          <img src={quiz} alt="quiz" className="quiz__image" />
+          <Button
+            label={"Start Quiz!"}
+            clickEvent={startQuiz}
+            disabled={false}
+            small={false}
+          />
+        </>
       )}
       {complete && (
         <div className="quiz__complete">
@@ -86,7 +90,7 @@ function Quiz({ lesson, data }) {
             Your final score is: {score} out of {quizData.length}
           </h2>
           <Button
-            label={'Try Again!'}
+            label={"Try Again!"}
             clickEvent={startQuiz}
             disabled={false}
             small={false}

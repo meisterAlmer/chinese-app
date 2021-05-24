@@ -1,14 +1,14 @@
-import Sidebar from '../../components/sidebar/Sidebar';
-import Button from '../../components/button/Button';
-import lessons from '../../assets/lessons.svg';
-import { useHistory } from 'react-router-dom';
-import './Lessons.css';
+import Sidebar from "../../components/sidebar/Sidebar";
+import Button from "../../components/button/Button";
+import lessons from "../../assets/lessons.svg";
+import { useHistory } from "react-router-dom";
+import "./Lessons.css";
 
 function Lessons() {
   const history = useHistory();
 
   function handleClick() {
-    history.push('/lessons/lesson/1');
+    history.push("/lessons/lesson/1");
   }
 
   return (
@@ -33,13 +33,13 @@ function Lessons() {
               mentality of the Chinese people.
             </p>
             <Button
-              label={'Go to first lesson!'}
+              label={"Go to first lesson!"}
               clickEvent={handleClick}
               disabled={false}
             />
           </div>
           <div className="lessons__image">
-            <img src={lessons} alt={lessons} />
+            <img src={lessons} alt="lessons" />
           </div>
         </div>
       </article>

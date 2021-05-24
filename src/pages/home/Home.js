@@ -1,13 +1,13 @@
-import './Home.css';
-import { useHistory } from 'react-router-dom';
-import home from '../../assets/home.svg';
-import Button from '../../components/button/Button';
+import "./Home.css";
+import { useHistory } from "react-router-dom";
+import home from "../../assets/home.svg";
+import Button from "../../components/button/Button";
 
 function Home() {
   const history = useHistory();
 
   function handleClick() {
-    history.push('/lessons');
+    history.push("/lessons");
   }
 
   return (
@@ -22,13 +22,13 @@ function Home() {
           businesses, and children.
         </p>
         <Button
-          label={'Start Learning!'}
+          label={"Start Learning!"}
           clickEvent={handleClick}
           disabled={false}
         />
       </div>
       <div className="home__image">
-        <img src={home} alt={home} />
+        <img src={home} alt="home" />
       </div>
     </section>
   );
