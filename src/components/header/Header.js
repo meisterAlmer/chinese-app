@@ -1,8 +1,8 @@
-import './Header.css';
-import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import { LoginContext } from '../../context/LoginContext';
-import Button from '../../components/button/Button';
+import "./Header.css";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { LoginContext } from "../../context/LoginContext";
+import Button from "../../components/button/Button";
 
 function Header() {
   const { appUser, userLogout } = useContext(LoginContext);
@@ -42,7 +42,12 @@ function Header() {
           )}
           {!appUser && (
             <li>
-              <NavLink exact to="/login" activeClassName="active">
+              <NavLink
+                exact
+                to="/login"
+                activeClassName="active"
+                className="login"
+              >
                 Login
               </NavLink>
             </li>
@@ -51,7 +56,7 @@ function Header() {
           {appUser && (
             <li>
               <Button
-                label={'Logout'}
+                label={"Logout"}
                 clickEvent={userLogout}
                 disabled={false}
                 small={true}
