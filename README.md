@@ -1,5 +1,10 @@
 # Chinese Language App
 
+1. Inleiding
+2. De applicatie starten
+3. Testen
+4. Backend
+
 ## Inleiding
 
 Leer Mandarijn Chinees met deze webapplicatie! Elke les bestaat uit een fictieve conversatie tussen twee personen. Ook bevat elke les een lijst van nieuwe woorden weergeven in Chinese karakters, pinyin en een Engelse vertaling.
