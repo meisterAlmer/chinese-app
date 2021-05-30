@@ -5,7 +5,7 @@
 3. Testen
 4. Backend
 
-## Inleiding
+## 1. Inleiding
 
 Leer Mandarijn Chinees met deze webapplicatie! Elke les bestaat uit een fictieve conversatie tussen twee personen. Ook bevat elke les een lijst van nieuwe woorden weergeven in Chinese karakters, pinyin en een Engelse vertaling.
 
@@ -15,7 +15,7 @@ Op de practice pagina is het ook mogelijk om flashcards en een quiz te doen met 
 
 ![Chinese Language App](src/assets/screenshot.png)
 
-## De applicatie starten
+## 2. De applicatie starten
 
 Na het clonen van het project naar de locale machine, installeer je eerst de node_modules door het volgende commando in de terminal te runnen:
 
@@ -27,13 +27,13 @@ Wanneer dit klaar is, kun je de applicatie in developer mode starten met behulp 
 
 Open [http://localhost:3000](http://localhost:3000) om de applicatie in de browser te weergeven.
 
-## Testen
+## 3. Testen
 
 Om de tests voor de helper functions te starten moet je het volgende commando in de terminal runnen:
 
 `npm test`
 
-## Backend
+## 4. Backend
 
 De applicatie maakt voor de authentication en database gebruik van Firebase. De configuratie is te vinden in:
 `src/modules/firebase.js`
