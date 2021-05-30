@@ -1,5 +1,7 @@
 # Chinese Language App
 
+[link to Github repository](https://github.com/meisterAlmer/chinese-app)
+
 1. Inleiding
 2. De applicatie starten
 3. Testen
