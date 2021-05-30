@@ -27,3 +27,10 @@ Open [http://localhost:3000](http://localhost:3000) om de applicatie in de brows
 Om de tests voor de helper functions te starten moet je het volgende commando in de terminal runnen:
 
 `npm test`
+
+## Backend
+
+De applicatie maakt voor de authentication en database gebruik van Firebase. De configuratie is te vinden in:
+`src/modules/firebase.js`
+
+De inloggegevens voor Firebase worden los verstrekt.
