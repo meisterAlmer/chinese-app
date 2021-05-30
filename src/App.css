@@ -5,7 +5,7 @@
   --color-inactive: #dddddd;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;900&display=swap");
 
 * {
   box-sizing: border-box;
@@ -16,7 +16,7 @@ body {
   height: 100vg;
   margin: 0;
   padding: 0;
-  font-family: 'Nunito Sans', sans-serif, -apple-system, BlinkMacSystemFont;
+  font-family: "Nunito Sans", sans-serif, -apple-system, BlinkMacSystemFont;
   font-size: 20px;
   color: var(--color-text);
 }
