@@ -1,72 +1,29 @@
 # Chinese Language App
 
-# Getting Started with Create React App
+## Inleiding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Leer Mandarijn Chinees met deze webapplicatie! Elke les bestaat uit een fictieve conversatie tussen twee personen. Ook bevat elke les een lijst van nieuwe woorden weergeven in Chinese karakters, pinyin en een Engelse vertaling.
 
-## Available Scripts
+De applicatie heeft een handige flashcard tool waarmee de studenten per les alle nieuwe karakters kunnen oefenen. Elke les heeft ook een quiz van alle nieuwe woorden, waarbij een score wordt bijgehouden. Daarnaast is er ook een practice pagina waar het mogelijk is om de woorden uit alle lessen te oefenen. Hierbij kan de gebruiker de lijst filteren en sorteren.
 
-In the project directory, you can run:
+Op de practice pagina is het ook mogelijk om flashcards en een quiz te doen met alle woorden of te filteren op geselecteerde lessen.
 
-### `npm start`
+![Chinese Language App](src/assets/screenshot.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## De applicatie starten
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Na het clonen van het project naar de locale machine, installeer je eerst de node_modules door het volgende commando in de terminal te runnen:
 
-### `npm test`
+`npm install`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Wanneer dit klaar is, kun je de applicatie in developer mode starten met behulp van:
 
-### `npm run build`
+`npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:3000](http://localhost:3000) om de applicatie in de browser te weergeven.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Testen
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Om de tests voor de helper functions te starten moet je het volgende commando in de terminal runnen:
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`npm test`
