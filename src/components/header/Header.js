@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContext";
 import Button from "../../components/button/Button";
+import logo from "../../assets/logo_lei.svg";
 
 function Header() {
   const { appUser, userLogout } = useContext(LoginContext);
@@ -11,6 +12,9 @@ function Header() {
 
   return (
     <header>
+      <div className="logo">
+        <img src={logo} alt="logo" className="logo__image" />
+      </div>
       <nav>
         <ul>
           <li>
